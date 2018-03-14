@@ -1,0 +1,18 @@
+﻿-- Table: test_service.products
+
+-- DROP TABLE test_service.products;
+
+CREATE TABLE test_service.products
+(
+    id character(100) COLLATE pg_catalog."default" NOT NULL,
+    imageUrl character(255) COLLATE pg_catalog."default",
+    price numeric(20,3) DEFAULT 0,
+    description character(255) COLLATE pg_catalog."default"
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE test_service.products
+    OWNER to postgres;

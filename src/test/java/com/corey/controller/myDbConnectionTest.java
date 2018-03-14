@@ -1,5 +1,5 @@
 
-package com.corey.spring;
+package com.corey.controller;
 
 import java.sql.DriverManager;
 import java.sql.Connection;
@@ -7,11 +7,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
 
-import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -29,7 +29,7 @@ public class myDbConnectionTest {
         } catch (ClassNotFoundException e) {
 
             System.out.println("Where is your PostgreSQL JDBC Driver? "
-                    + "Include in your library path!");
+                    + "Include in the POM file or library path!");
             e.printStackTrace();
             return;
 
@@ -42,7 +42,7 @@ public class myDbConnectionTest {
         try {
 
             connection = DriverManager.getConnection(
-                    "jdbc:postgresql://127.0.0.1:5432/postgres", "postgres",
+                    "jdbc:postgresql://127.0.0.1:5432/em_test", "postgres",
                     "postgres");
 
         } catch (SQLException e) {
@@ -54,7 +54,7 @@ public class myDbConnectionTest {
         }
 
         if (connection != null) {
-            System.out.println("You made it, take control your database now!");
+            System.out.println("Successfully connected to the PostgreSQL! schema: em_test");
         } else {
             System.out.println("Failed to make connection!");
         }
@@ -64,7 +64,7 @@ public class myDbConnectionTest {
         try {
 
             stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT 1");
+            ResultSet rs = stmt.executeQuery("SELECT count(*) From test_service.products");
 
             System.out.println("No. of records : " + rs.getRow());
 
